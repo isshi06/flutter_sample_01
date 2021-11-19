@@ -65,14 +65,20 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         // センターはレイアウトウィジェットです。それは一人っ子を取り、それを配置します親の真ん中で。
-        child: ElevatedButton(
-          child: const Text('次へ'),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => NextPage('夏目漱石')),
-            );
-          },
+        child: Column(
+          children: [
+            Image.network(
+                'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
+            ElevatedButton(
+                child: const Text('次へ'),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => NextPage('夏目漱石')),
+                  );
+                },
+            ),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
