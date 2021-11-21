@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sample_01/next_page.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(const MyApp());
@@ -53,6 +54,8 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  final myController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     // このメソッドは、たとえば完了したように、setStateが呼び出されるたびに再実行されます。
@@ -63,21 +66,40 @@ class _MyHomePageState extends State<MyHomePage> {
         // App.buildメソッドを使用し、それを使用してアプリバーのタイトルを設定します。
         title: Text(widget.title),
       ),
-      body: Center(
-        // センターはレイアウトウィジェットです。それは一人っ子を取り、それを配置します親の真ん中で。
+      body: SizedBox(
+        width: double.infinity,
         child: Column(
           children: [
-            Image.network(
-                'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
-            ElevatedButton(
-                child: const Text('次へ'),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => NextPage('夏目漱石')),
-                  );
-                },
+            TextField(
+              decoration: const InputDecoration(
+                hintText: '名前',
+              ),
+              onChanged: (text) {
+                print('First text field: $text');
+              },
+              controller: myController,
             ),
+            const TextField(
+              decoration: InputDecoration(
+                hintText: '趣味',
+              ),
+            ),
+            ElevatedButton(
+              child: const Text('新規登録'),
+              onPressed: () {
+                // TODO: 新規登録
+              },
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                final url = Uri.parse(
+                    'https://zipcloud.ibsnet.co.jp/api/search?zipcode=0010000');
+                final response = await http.get(url);
+                print('Response status: ${response.statusCode}');
+                print('Response body: ${response.body}');
+              },
+              child: const Text('APIテスト'),
+            )
           ],
         ),
       ),
