@@ -42,6 +42,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  String dropdownValue = 'One';
 
   void _incrementCounter() {
     setState(() {
@@ -64,14 +65,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> _zipApiPageChange() async {
     final url =
-    Uri.parse('https://zipcloud.ibsnet.co.jp/api/search?zipcode=0010000');
+        Uri.parse('https://zipcloud.ibsnet.co.jp/api/search?zipcode=0010000');
     final response = await http.get(url);
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');
     await Navigator.push(
       context,
       MaterialPageRoute<void>(
-        builder: (context) => NextPage('Response status: ${response.statusCode}'),
+        builder: (context) =>
+            NextPage('Response status: ${response.statusCode}'),
       ),
     );
   }
@@ -82,6 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');
   }
+
 
   final myController = TextEditingController();
 
@@ -142,13 +145,31 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: _localAPITest,
               child: const Text('ローカルAPIテスト'),
             ),
+            DropdownButton<String>(
+              value: dropdownValue,
+              icon: const Icon(Icons.arrow_downward),
+              iconSize: 24,
+              elevation: 16,
+              style: const TextStyle(color: Colors.deepPurple),
+              underline: Container(
+                height: 2,
+                color: Colors.deepPurpleAccent,
+              ),
+              onChanged: (String? newValue) {
+                setState(() {
+                  dropdownValue = newValue!;
+                });
+              },
+              items: <String>['One', 'Two', 'Free', 'Four']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ), // この末尾のコンマにより、ビルドメソッドの自動フォーマットがより適切になります。
     );
   }
