@@ -1,13 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_sample_01/next_page.dart';
 import 'package:flutter_sample_01/service/api.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(
-      const ProviderScope(
-        child: MyApp(),
-      ),
+    const ProviderScope(
+      child: MyApp(),
+    ),
   );
 }
 
@@ -29,13 +33,22 @@ class MyApp extends StatelessWidget {
 
 // Provider example.
 
-// 1ずつ値を増加させるためのカウンターProvider
-final counterProvider = StateProvider((ref) => 0);
+final configProvider = FutureProvider<Map<String, Object?>>((ref) async {
+  final jsonString = await rootBundle.loadString('assets/config.json');
 
-// カウンターの値を2倍にした値を提供するProvider
-final doubleCounterProvider = Provider((ref) {
-  final count = ref.watch(counterProvider);
-  return count * 2;
+  final content = json.decode(jsonString) as Map<String, Object?>;
+  return content;
+});
+
+final zipcodeProvider = StateProvider((ref) => '0010000');
+
+final searchResultProvider = FutureProvider<Map<String, Object?>>((ref) async {
+  final zip = ref.watch(zipcodeProvider);
+  final url =
+      Uri.parse('https://zipcloud.ibsnet.co.jp/api/search?zipcode=$zip');
+  final response = await http.get(url);
+  print(response);
+  return json.decode(response.body) as Map<String, Object?>;
 });
 
 // Widget example.
@@ -47,30 +60,76 @@ class ProviderPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // doubleCounterProvider を読み取る。
-    // counterProvider の状態が更新されると doubleCounterProvider も変更され、再構築される。
-    final doubleCount = ref.watch(doubleCounterProvider);
+    // FutureProviderを読み取る（取得できる型は `AsyncValue<T>`）
+    final config = ref.watch(configProvider);
+    final _zipcodeController = TextEditingController();
+    final api = ApiService();
+    final zipSearchResult = ref.watch(searchResultProvider);
 
     return Scaffold(
       appBar: AppBar(title: const Text(title)),
+      // AsyncValue は `.when` を使ってハンドリングする
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text(
-            '2倍されたカウント値：',
-            style: Theme.of(context).textTheme.headline6,
+          Column(
+            children: [
+              TextField(
+                decoration: const InputDecoration(
+                  hintText: '検索する郵便番号',
+                ),
+                controller: _zipcodeController,
+              ),
+              ElevatedButton(
+                onPressed: () => ref.read(zipcodeProvider.notifier).update(
+                      (state) => _zipcodeController.text,
+                    ),
+                child: const Text('住所検索'),
+              ),
+              Wrap(
+                children: [
+                  ref.watch(searchResultProvider).when(
+                        // 非同期処理中は `loading` で指定したWidgetが表示される
+                        loading: () => const CircularProgressIndicator(),
+                        // エラーが発生した場合に表示されるWidgetを指定
+                        error: (error, stack) => Text('Error: $error'),
+                        // 非同期処理が完了すると、取得した `config` が `data` で使用できる
+                        data: (zipSearchResult) {
+                          return RefreshIndicator(
+                            onRefresh: () async => ref.refresh(searchResultProvider),
+                            child: Column(
+                              children: [
+                                Text(zipSearchResult['results'].toString()),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                ],
+              ),
+            ],
           ),
-          // doubleCounterProvider の値を表示
-          Text(
-            '$doubleCount',
-            style: Theme.of(context).textTheme.headline1,
+          const Divider(
+            height: 20,
+            thickness: 5,
+            indent: 20,
+            endIndent: 20,
           ),
-          ElevatedButton(
-            // counterProvider の値を+1する。
-            onPressed: () => ref.read(counterProvider.notifier).update(
-                  (state) => state + 1,
-            ),
-            child: const Text('Increase Count'),
+          const Text('appName'),
+          config.when(
+            // 非同期処理中は `loading` で指定したWidgetが表示される
+            loading: () => const CircularProgressIndicator(),
+            // エラーが発生した場合に表示されるWidgetを指定
+            error: (error, stack) => Text('Error: $error'),
+            // 非同期処理が完了すると、取得した `config` が `data` で使用できる
+            data: (config) {
+              return Text(config['appName'].toString());
+            },
+          ),
+          const Divider(
+            height: 20,
+            thickness: 5,
+            indent: 20,
+            endIndent: 20,
           ),
         ],
       ),
