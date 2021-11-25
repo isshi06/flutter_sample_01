@@ -25,7 +25,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const ProviderPage(),
+      home: DefaultTabController(
+        length: 2,
+        child: ProviderPage(),
+      ),
     );
   }
 }
@@ -33,10 +36,14 @@ class MyApp extends StatelessWidget {
 
 // Widget example.
 class ProviderPage extends ConsumerWidget {
-  const ProviderPage({Key? key}) : super(key: key);
+  ProviderPage({Key? key}) : super(key: key);
 
   static const String title = 'ProviderPage';
   static const String routeName = 'provider-page';
+  final List<Tab> myTabs = <Tab>[
+    Tab(text: 'LEFT'),
+    Tab(text: 'RIGHT'),
+  ];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -45,9 +52,13 @@ class ProviderPage extends ConsumerWidget {
     final zipSearchResult = ref.watch(searchResultProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text(title)),
-      // AsyncValue は `.when` を使ってハンドリングする
-      body: Column(
+      appBar: AppBar(
+          title: const Text(title),
+          bottom: TabBar(
+            tabs: myTabs,
+          ),
+      ),
+      body: TabBarView(
         children: [
           Column(
             children: [
@@ -87,18 +98,7 @@ class ProviderPage extends ConsumerWidget {
               ),
             ],
           ),
-          const Divider(
-            height: 20,
-            thickness: 5,
-            indent: 20,
-            endIndent: 20,
-          ),
-          const Divider(
-            height: 20,
-            thickness: 5,
-            indent: 20,
-            endIndent: 20,
-          ),
+          Column(),
         ],
       ),
     );
