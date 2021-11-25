@@ -1,10 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_sample_01/service/api.dart';
-import 'package:flutter_sample_01/service/zipcode.dart';
+import 'package:flutter_sample_01/domain/meal_history/meal_history_home.dart';
+import 'package:flutter_sample_01/domain/zipcode/search_by_zipcode.dart';
 
 void main() {
   runApp(
@@ -27,7 +24,7 @@ class MyApp extends StatelessWidget {
       ),
       home: DefaultTabController(
         length: 2,
-        child: ProviderPage(),
+        child: HomePage(),
       ),
     );
   }
@@ -35,22 +32,18 @@ class MyApp extends StatelessWidget {
 
 
 // Widget example.
-class ProviderPage extends ConsumerWidget {
-  ProviderPage({Key? key}) : super(key: key);
+class HomePage extends ConsumerWidget {
+  HomePage({Key? key}) : super(key: key);
 
   static const String title = 'ProviderPage';
   static const String routeName = 'provider-page';
   final List<Tab> myTabs = <Tab>[
-    Tab(text: 'LEFT'),
-    Tab(text: 'RIGHT'),
+    const Tab(text: '郵便番号検索'),
+    const Tab(text: '食事日記'),
   ];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _zipcodeController = TextEditingController();
-    final api = ApiService();
-    final zipSearchResult = ref.watch(searchResultProvider);
-
     return Scaffold(
       appBar: AppBar(
           title: const Text(title),
@@ -60,45 +53,8 @@ class ProviderPage extends ConsumerWidget {
       ),
       body: TabBarView(
         children: [
-          Column(
-            children: [
-              TextField(
-                decoration: const InputDecoration(
-                  hintText: '検索する郵便番号',
-                  labelText: '郵便番号',
-                ),
-                controller: _zipcodeController,
-              ),
-              ElevatedButton(
-                onPressed: () => ref.read(zipcodeProvider.notifier).update(
-                      (state) => _zipcodeController.text,
-                    ),
-                child: const Text('住所検索'),
-              ),
-              Wrap(
-                children: [
-                  ref.watch(searchResultProvider).when(
-                        // 非同期処理中は `loading` で指定したWidgetが表示される
-                        loading: () => const CircularProgressIndicator(),
-                        // エラーが発生した場合に表示されるWidgetを指定
-                        error: (error, stack) => Text('Error: $error'),
-                        // 非同期処理が完了すると、取得した `config` が `data` で使用できる
-                        data: (zipSearchResult) {
-                          return RefreshIndicator(
-                            onRefresh: () async => ref.refresh(searchResultProvider),
-                            child: Column(
-                              children: [
-                                Text(zipSearchResult['results'].toString()),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                ],
-              ),
-            ],
-          ),
-          Column(),
+          const SearchByZipcode(),
+          MealHistoryHome(),
         ],
       ),
     );
