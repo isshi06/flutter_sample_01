@@ -8,7 +8,6 @@ class MealHistoryHome extends ConsumerWidget {
   MealHistoryService mealHistory = MealHistoryService();
   List<String> itemList = [];
 
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _mealController = TextEditingController();
@@ -23,14 +22,19 @@ class MealHistoryHome extends ConsumerWidget {
             ),
             controller: _mealController,
           ),
-          // ElevatedButton(
-          //   onPressed: () => mealHistory.postHistory(),
-          //   child: const Text('記録 test(値固定)'),
-          // ),
+          ElevatedButton(
+            onPressed: () {
+              mealHistory.postHistory();
+              ref.read(updateCountProvider.notifier).update(
+                    (state) => state + 1,
+                  );
+            },
+            child: const Text('記録 test(値固定)'),
+          ),
           ElevatedButton(
             onPressed: () => ref.read(updateCountProvider.notifier).update(
                   (state) => state + 1,
-            ),
+                ),
             child: const Text('更新'),
           ),
           Wrap(
