@@ -10,8 +10,8 @@ final searchResultProvider = FutureProvider<Map<String, Object?>>((ref) async {
   final url =
   Uri.parse('https://zipcloud.ibsnet.co.jp/api/search?zipcode=$zip');
   final response = await http.get(url);
-  print('^^^^^^^^^^^^^');
-  print(response);
+  print('------ zipcode API called -------');
+  print('status: ${response.statusCode}');
   return json.decode(response.body) as Map<String, Object?>;
 });
 

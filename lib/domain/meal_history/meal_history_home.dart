@@ -23,41 +23,37 @@ class MealHistoryHome extends ConsumerWidget {
             ),
             controller: _mealController,
           ),
-          RefreshIndicator(
-            child: ElevatedButton(
-              onPressed: () => mealHistory.postHistory(),
-              child: const Text('記録'),
-            ),
-            onRefresh: () async => ref.refresh(mealHistoryProvider),
-          ),
           // ElevatedButton(
           //   onPressed: () => mealHistory.postHistory(),
-          //   child: const Text('記録'),
+          //   child: const Text('記録 test(値固定)'),
           // ),
           ElevatedButton(
-            onPressed: () => mealHistory.postHistory(),
+            onPressed: () => ref.read(updateCountProvider.notifier).update(
+                  (state) => state + 1,
+            ),
             child: const Text('更新'),
           ),
-          ref.watch(mealHistoryProvider).when(
+          Wrap(
+            children: [
+              ref.watch(mealHistoryProvider).when(
                     // 非同期処理中は `loading` で指定したWidgetが表示される
                     loading: () => const CircularProgressIndicator(),
                     // エラーが発生した場合に表示されるWidgetを指定
                     error: (error, stack) => Text('Error: $error'),
                     // 非同期処理が完了すると、取得した `config` が `data` で使用できる
-                    data: (mealHistoryProvider) {
+                    data: (mealHistory) {
                       return RefreshIndicator(
-                        onRefresh: () async => ref.refresh(mealProvider),
-                        // child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              Text(mealHistoryProvider['meal_histories']
-                                  .toString()),
-                            ],
-                          ),
-                        // ),
+                        onRefresh: () async => ref.refresh(mealHistoryProvider),
+                        child: Column(
+                          children: [
+                            Text(mealHistory['meal_histories'].toString()),
+                          ],
+                        ),
                       );
                     },
                   ),
+            ],
+          ),
         ],
       ),
     );
