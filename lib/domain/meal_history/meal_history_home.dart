@@ -6,11 +6,30 @@ class MealHistoryHome extends ConsumerWidget {
   MealHistoryHome({Key? key}) : super(key: key);
 
   MealHistoryService mealHistory = MealHistoryService();
-  List<String> itemList = [];
+  List<DropdownMenuItem<int>> _items = List.empty();
+  String _selectItem = 'A';
+  // void setItems() {
+  //   List<DropdownMenuItem<int>> _items = List.empty();
+  //   _items
+  //     ..add(const DropdownMenuItem(
+  //       value: 1,
+  //       child: Text('A', style: TextStyle(fontSize: 40.0),),
+  //     ))
+  //     ..add(const DropdownMenuItem(
+  //       value: 2,
+  //       child: Text('B', style: TextStyle(fontSize: 40.0),),
+  //     ))
+  //     ..add(const DropdownMenuItem(
+  //       value: 3,
+  //       child: Text('C', style: TextStyle(fontSize: 40.0),),
+  //     ));
+  // }
+
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _mealController = TextEditingController();
+     var formvalue = ref.watch(mealProvider)['taste_type'];
 
     return Scaffold(
       body: Column(
@@ -18,13 +37,27 @@ class MealHistoryHome extends ConsumerWidget {
           TextField(
             decoration: const InputDecoration(
               hintText: 'カツ丼・焼きそば',
-              labelText: '食べたもの',
+              labelText: 'description',
             ),
             controller: _mealController,
           ),
+          DropdownButton(
+            // items: ref.read(dropdownProvider.notifier),
+            items: ref.read(dropdownProvider).map<DropdownMenuItem<String>>((value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+            value: _selectItem,
+            // onChanged: (value) => ref.read(mealProvider.notifier).update(
+            //     (value) => formvalue = value
+            // ),
+            onChanged: (value) => print(value),
+          ),
           ElevatedButton(
             onPressed: () {
-              mealHistory.postHistory();
+              mealHistory.postHistory(_mealController.text);
               ref.read(updateCountProvider.notifier).update(
                     (state) => state + 1,
                   );
