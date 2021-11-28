@@ -10,15 +10,11 @@ final mealProvider = StateProvider<Map<String, int>>((ref) => {
   'timing': 1,
 });
 
-final dropdownProvider = Provider<List<String>>((ref) => <String>['A', 'B', 'C']);
-// final dropdownProvider = Provider<Map<String, int>>((ref) => {
-//   'breakfast': 1,
-//   'lunch': 2,
-//   'dinner': 3,
-//   'snack': 4
-// });
+final dropdownProvider = Provider<List<String>>((ref) => <String>['breakfast', 'lunch', 'dinner', 'snack']);
 
+final dropdownSelectedProvider = StateProvider<String?>((ref) => 'breakfast');
 
+// 画面更新用Provider
 final updateCountProvider = StateProvider((ref) => 0);
 
 final mealHistoryProvider = FutureProvider<Map<String, Object?>>((ref) async {
@@ -46,11 +42,11 @@ class MealHistory {
 }
 
 class MealHistoryService {
-  Future<Map<String, Object?>> postHistory(String description) async {
+  Future<Map<String, Object?>> postHistory(String description, String timing) async {
     final headers = <String, String>{'content-type': 'application/json'};
     final body = json.encode({
       'user_id': '1',
-      'timing': 1,
+      'timing': timing,
       'meal_type_id': 1,
       'taste_type_id': 1,
       'description': description
@@ -65,7 +61,6 @@ class MealHistoryService {
     final url = Uri.parse('http://192.168.0.4:30000/api/v1/meal_histories');
     final response = await http.get(url, headers: headers);
     print('------ mealHistory index API called -------');
-    print('status: ${response.statusCode}');
     return json.decode(response.body) as Map<String, Object?>;
   }
 

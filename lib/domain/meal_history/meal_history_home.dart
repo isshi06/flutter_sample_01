@@ -6,58 +6,43 @@ class MealHistoryHome extends ConsumerWidget {
   MealHistoryHome({Key? key}) : super(key: key);
 
   MealHistoryService mealHistory = MealHistoryService();
-  List<DropdownMenuItem<int>> _items = List.empty();
-  String _selectItem = 'A';
-  // void setItems() {
-  //   List<DropdownMenuItem<int>> _items = List.empty();
-  //   _items
-  //     ..add(const DropdownMenuItem(
-  //       value: 1,
-  //       child: Text('A', style: TextStyle(fontSize: 40.0),),
-  //     ))
-  //     ..add(const DropdownMenuItem(
-  //       value: 2,
-  //       child: Text('B', style: TextStyle(fontSize: 40.0),),
-  //     ))
-  //     ..add(const DropdownMenuItem(
-  //       value: 3,
-  //       child: Text('C', style: TextStyle(fontSize: 40.0),),
-  //     ));
-  // }
-
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _mealController = TextEditingController();
-     var formvalue = ref.watch(mealProvider)['taste_type'];
+    final _selectItem = ref.watch(dropdownSelectedProvider);
+    print('-- widget MealHistoryHome build --');
 
     return Scaffold(
       body: Column(
         children: [
           TextField(
             decoration: const InputDecoration(
-              hintText: 'カツ丼・焼きそば',
+              hintText: '説明',
               labelText: 'description',
             ),
             controller: _mealController,
           ),
           DropdownButton(
-            // items: ref.read(dropdownProvider.notifier),
-            items: ref.read(dropdownProvider).map<DropdownMenuItem<String>>((value) {
+            items: ref
+                .read(dropdownProvider)
+                .map<DropdownMenuItem<String>>((value) {
               return DropdownMenuItem<String>(
                 value: value,
                 child: Text(value),
               );
             }).toList(),
             value: _selectItem,
-            // onChanged: (value) => ref.read(mealProvider.notifier).update(
-            //     (value) => formvalue = value
-            // ),
-            onChanged: (value) => print(value),
+            onChanged: (String? value) {
+              ref.read(dropdownSelectedProvider.notifier).update(
+                    (state) => value!,
+              );
+            },
           ),
           ElevatedButton(
-            onPressed: () {
-              mealHistory.postHistory(_mealController.text);
+            onPressed: () async {
+              await mealHistory.postHistory(_mealController.text, _selectItem!);
+              // 画面更新用処理
               ref.read(updateCountProvider.notifier).update(
                     (state) => state + 1,
                   );
