@@ -6,10 +6,10 @@ class MealHistoryHome extends ConsumerWidget {
   MealHistoryHome({Key? key}) : super(key: key);
 
   MealHistoryService mealHistory = MealHistoryService();
+  final _mealController = TextEditingController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _mealController = TextEditingController();
     final _selectItem = ref.watch(dropdownSelectedProvider);
     print('-- widget MealHistoryHome build --');
 
