@@ -53,7 +53,7 @@ class HomePage extends ConsumerWidget {
       ),
       body: TabBarView(
         children: [
-          const SearchByZipcode(),
+          SearchByZipcode(),
           MealHistoryHome(),
         ],
       ),

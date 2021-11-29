@@ -3,12 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_sample_01/service/zipcode.dart';
 
 class SearchByZipcode extends ConsumerWidget {
-  const SearchByZipcode({Key? key}) : super(key: key);
+  SearchByZipcode({Key? key}) : super(key: key);
+  final _zipcodeController = TextEditingController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _zipcodeController = TextEditingController();
-
     return Scaffold(
       body: Column(
         children: [
