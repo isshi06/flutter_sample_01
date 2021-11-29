@@ -47,7 +47,7 @@ class MealHistoryHome extends ConsumerWidget {
                     (state) => state + 1,
                   );
             },
-            child: const Text('記録 test(値固定)'),
+            child: const Text('記録'),
           ),
           ElevatedButton(
             onPressed: () => ref.read(updateCountProvider.notifier).update(
