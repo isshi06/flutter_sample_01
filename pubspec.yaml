@@ -28,6 +28,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   freezed_annotation:
+  json_annotation: ">=4.3.0"
   flutter:
     sdk: flutter
 
@@ -51,6 +52,8 @@ dev_dependencies:
   flutter_riverpod: ^1.0.0
   build_runner:
   freezed:
+  json_serializable:
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
