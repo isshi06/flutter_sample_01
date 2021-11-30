@@ -21,17 +21,24 @@ AddressInfo _$AddressInfoFromJson(Map<String, dynamic> json) {
 class _$AddressInfoTearOff {
   const _$AddressInfoTearOff();
 
-  Data call(String address1, String address2, String address3, String kana1,
-      String kana2, String kana3, int prefcode, String zipcode) {
+  Data call(
+      {String? address1,
+      String? address2,
+      String? address3,
+      String? kana1,
+      String? kana2,
+      String? kana3,
+      String? prefcode,
+      String? zipcode}) {
     return Data(
-      address1,
-      address2,
-      address3,
-      kana1,
-      kana2,
-      kana3,
-      prefcode,
-      zipcode,
+      address1: address1,
+      address2: address2,
+      address3: address3,
+      kana1: kana1,
+      kana2: kana2,
+      kana3: kana3,
+      prefcode: prefcode,
+      zipcode: zipcode,
     );
   }
 
@@ -45,14 +52,14 @@ const $AddressInfo = _$AddressInfoTearOff();
 
 /// @nodoc
 mixin _$AddressInfo {
-  String get address1 => throw _privateConstructorUsedError;
-  String get address2 => throw _privateConstructorUsedError;
-  String get address3 => throw _privateConstructorUsedError;
-  String get kana1 => throw _privateConstructorUsedError;
-  String get kana2 => throw _privateConstructorUsedError;
-  String get kana3 => throw _privateConstructorUsedError;
-  int get prefcode => throw _privateConstructorUsedError;
-  String get zipcode => throw _privateConstructorUsedError;
+  String? get address1 => throw _privateConstructorUsedError;
+  String? get address2 => throw _privateConstructorUsedError;
+  String? get address3 => throw _privateConstructorUsedError;
+  String? get kana1 => throw _privateConstructorUsedError;
+  String? get kana2 => throw _privateConstructorUsedError;
+  String? get kana3 => throw _privateConstructorUsedError;
+  String? get prefcode => throw _privateConstructorUsedError;
+  String? get zipcode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -66,14 +73,14 @@ abstract class $AddressInfoCopyWith<$Res> {
           AddressInfo value, $Res Function(AddressInfo) then) =
       _$AddressInfoCopyWithImpl<$Res>;
   $Res call(
-      {String address1,
-      String address2,
-      String address3,
-      String kana1,
-      String kana2,
-      String kana3,
-      int prefcode,
-      String zipcode});
+      {String? address1,
+      String? address2,
+      String? address3,
+      String? kana1,
+      String? kana2,
+      String? kana3,
+      String? prefcode,
+      String? zipcode});
 }
 
 /// @nodoc
@@ -99,35 +106,35 @@ class _$AddressInfoCopyWithImpl<$Res> implements $AddressInfoCopyWith<$Res> {
       address1: address1 == freezed
           ? _value.address1
           : address1 // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       address2: address2 == freezed
           ? _value.address2
           : address2 // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       address3: address3 == freezed
           ? _value.address3
           : address3 // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       kana1: kana1 == freezed
           ? _value.kana1
           : kana1 // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       kana2: kana2 == freezed
           ? _value.kana2
           : kana2 // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       kana3: kana3 == freezed
           ? _value.kana3
           : kana3 // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       prefcode: prefcode == freezed
           ? _value.prefcode
           : prefcode // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String?,
       zipcode: zipcode == freezed
           ? _value.zipcode
           : zipcode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -138,14 +145,14 @@ abstract class $DataCopyWith<$Res> implements $AddressInfoCopyWith<$Res> {
       _$DataCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String address1,
-      String address2,
-      String address3,
-      String kana1,
-      String kana2,
-      String kana3,
-      int prefcode,
-      String zipcode});
+      {String? address1,
+      String? address2,
+      String? address3,
+      String? kana1,
+      String? kana2,
+      String? kana3,
+      String? prefcode,
+      String? zipcode});
 }
 
 /// @nodoc
@@ -169,38 +176,38 @@ class _$DataCopyWithImpl<$Res> extends _$AddressInfoCopyWithImpl<$Res>
     Object? zipcode = freezed,
   }) {
     return _then(Data(
-      address1 == freezed
+      address1: address1 == freezed
           ? _value.address1
           : address1 // ignore: cast_nullable_to_non_nullable
-              as String,
-      address2 == freezed
+              as String?,
+      address2: address2 == freezed
           ? _value.address2
           : address2 // ignore: cast_nullable_to_non_nullable
-              as String,
-      address3 == freezed
+              as String?,
+      address3: address3 == freezed
           ? _value.address3
           : address3 // ignore: cast_nullable_to_non_nullable
-              as String,
-      kana1 == freezed
+              as String?,
+      kana1: kana1 == freezed
           ? _value.kana1
           : kana1 // ignore: cast_nullable_to_non_nullable
-              as String,
-      kana2 == freezed
+              as String?,
+      kana2: kana2 == freezed
           ? _value.kana2
           : kana2 // ignore: cast_nullable_to_non_nullable
-              as String,
-      kana3 == freezed
+              as String?,
+      kana3: kana3 == freezed
           ? _value.kana3
           : kana3 // ignore: cast_nullable_to_non_nullable
-              as String,
-      prefcode == freezed
+              as String?,
+      prefcode: prefcode == freezed
           ? _value.prefcode
           : prefcode // ignore: cast_nullable_to_non_nullable
-              as int,
-      zipcode == freezed
+              as String?,
+      zipcode: zipcode == freezed
           ? _value.zipcode
           : zipcode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -208,27 +215,34 @@ class _$DataCopyWithImpl<$Res> extends _$AddressInfoCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$Data implements Data {
-  const _$Data(this.address1, this.address2, this.address3, this.kana1,
-      this.kana2, this.kana3, this.prefcode, this.zipcode);
+  const _$Data(
+      {this.address1,
+      this.address2,
+      this.address3,
+      this.kana1,
+      this.kana2,
+      this.kana3,
+      this.prefcode,
+      this.zipcode});
 
   factory _$Data.fromJson(Map<String, dynamic> json) => _$$DataFromJson(json);
 
   @override
-  final String address1;
+  final String? address1;
   @override
-  final String address2;
+  final String? address2;
   @override
-  final String address3;
+  final String? address3;
   @override
-  final String kana1;
+  final String? kana1;
   @override
-  final String kana2;
+  final String? kana2;
   @override
-  final String kana3;
+  final String? kana3;
   @override
-  final int prefcode;
+  final String? prefcode;
   @override
-  final String zipcode;
+  final String? zipcode;
 
   @override
   String toString() {
@@ -271,33 +285,33 @@ class _$Data implements Data {
 
 abstract class Data implements AddressInfo {
   const factory Data(
-      String address1,
-      String address2,
-      String address3,
-      String kana1,
-      String kana2,
-      String kana3,
-      int prefcode,
-      String zipcode) = _$Data;
+      {String? address1,
+      String? address2,
+      String? address3,
+      String? kana1,
+      String? kana2,
+      String? kana3,
+      String? prefcode,
+      String? zipcode}) = _$Data;
 
   factory Data.fromJson(Map<String, dynamic> json) = _$Data.fromJson;
 
   @override
-  String get address1;
+  String? get address1;
   @override
-  String get address2;
+  String? get address2;
   @override
-  String get address3;
+  String? get address3;
   @override
-  String get kana1;
+  String? get kana1;
   @override
-  String get kana2;
+  String? get kana2;
   @override
-  String get kana3;
+  String? get kana3;
   @override
-  int get prefcode;
+  String? get prefcode;
   @override
-  String get zipcode;
+  String? get zipcode;
   @override
   @JsonKey(ignore: true)
   $DataCopyWith<Data> get copyWith => throw _privateConstructorUsedError;

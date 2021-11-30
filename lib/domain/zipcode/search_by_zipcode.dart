@@ -38,7 +38,7 @@ class SearchByZipcode extends ConsumerWidget {
                             ref.refresh(searchResultProvider),
                         child: Column(
                           children: [
-                            Text(zipSearchResult['results'].toString()),
+                            Text(zipSearchResult.toString()),
                           ],
                         ),
                       );

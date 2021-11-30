@@ -7,14 +7,14 @@ part of 'address_info.dart';
 // **************************************************************************
 
 _$Data _$$DataFromJson(Map<String, dynamic> json) => _$Data(
-      json['address1'] as String,
-      json['address2'] as String,
-      json['address3'] as String,
-      json['kana1'] as String,
-      json['kana2'] as String,
-      json['kana3'] as String,
-      json['prefcode'] as int,
-      json['zipcode'] as String,
+      address1: json['address1'] as String?,
+      address2: json['address2'] as String?,
+      address3: json['address3'] as String?,
+      kana1: json['kana1'] as String?,
+      kana2: json['kana2'] as String?,
+      kana3: json['kana3'] as String?,
+      prefcode: json['prefcode'] as String?,
+      zipcode: json['zipcode'] as String?,
     );
 
 Map<String, dynamic> _$$DataToJson(_$Data instance) => <String, dynamic>{
