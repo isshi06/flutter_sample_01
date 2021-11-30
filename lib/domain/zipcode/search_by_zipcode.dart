@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_sample_01/service/zipcode.dart';
+import 'package:flutter_sample_01/entity/zip_api_result.dart';
 
 class SearchByZipcode extends ConsumerWidget {
   SearchByZipcode({Key? key}) : super(key: key);
@@ -32,13 +33,13 @@ class SearchByZipcode extends ConsumerWidget {
                     // エラーが発生した場合に表示されるWidgetを指定
                     error: (error, stack) => Text('Error: $error'),
                     // 非同期処理が完了すると、取得した `config` が `data` で使用できる
-                    data: (zipSearchResult) {
+                    data: (ZipApiResult zipApiResult) {
                       return RefreshIndicator(
                         onRefresh: () async =>
                             ref.refresh(searchResultProvider),
                         child: Column(
                           children: [
-                            Text(zipSearchResult.toString()),
+                            Text(zipApiResult.results.toString())
                           ],
                         ),
                       );
