@@ -21,14 +21,14 @@ final mealHistoryProvider = FutureProvider<List<MealHistory>?>((ref) async {
   final headers = <String, String>{'content-type': 'application/json'};
   final url = Uri.parse('http://192.168.0.4:30000/api/v1/meal_histories');
   final response = await http.get(url, headers: headers);
-  print('------ mealHistory index API called -------');
-  final decodedJson = json.decode(response.body) as Map<String, Object?>;
+  // print(jsonDecode(response.body));
+  final decodedJson = json.decode(response.body) as List;
   if(response.statusCode == 200){
-    final mealHistory = MealHistory.fromJson(decodedJson);
-    print(mealHistory);
-    return List.empty();
+    // 動くけど Missing parameter type for 'mealHistoryJson'.
+    List<MealHistory> mealHistoryList = decodedJson.map((mealHistoryJson) => MealHistory.fromJson(mealHistoryJson)).toList();
+    print(mealHistoryList);
+    return mealHistoryList;
   }else{
-    print('zip api error');
     return List.empty();
   }
 });
@@ -46,24 +46,5 @@ class MealHistoryService {
     final url = Uri.parse('http://192.168.0.4:30000/api/v1/meal_histories');
     final response = await http.post(url, headers: headers, body: body);
     return json.decode(response.body) as Map<String, Object?>;
-  }
-
-  Future<List<MealHistory>?> getHistories() async {
-    final headers = <String, String>{'content-type': 'application/json'};
-    final url = Uri.parse('http://192.168.0.4:30000/api/v1/meal_histories');
-    final response = await http.get(url, headers: headers);
-    print('------ mealHistory index API called -------');
-    final decodedJson = json.decode(response.body) as Map<String, Object?>;
-    final mealHistoryList = List<MealHistory>.empty();
-    if(response.statusCode == 200){
-      final mealHistory = MealHistory.fromJson(decodedJson);
-      return List.empty();
-    }else{
-      print('zip api error');
-      return List.empty();
-    }
-  }
-
-  void fetch() async {
   }
 }

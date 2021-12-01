@@ -68,9 +68,9 @@ class MealHistoryHome extends ConsumerWidget {
                         onRefresh: () async => ref.refresh(mealHistoryProvider),
                         child: Column(
                           children: [
-                            // Text(mealHistory.toString()),
+                            Text(mealHistory.toString()),
                             // 仮
-                            Text('aaa'),
+                            // Text('aaa'),
                           ],
                         ),
                       );
