@@ -39,37 +39,38 @@ class SearchByZipcode extends ConsumerWidget {
                             ref.refresh(searchResultProvider),
                         child: Column(
                           children: [
-                            ListTile(
+                            if(zipApiResult.results == null) const Text('検索結果がありません'),
+                            if(zipApiResult.results != null) ListTile(
                               leading: const Text('都道府県コード'),
                               title: Text(
                                   zipApiResult.results![0].prefcode.toString()),
                             ),
-                            ListTile(
+                            if(zipApiResult.results != null) ListTile(
                               leading: const Text('都道府県名'),
                               title: Text(
                                   zipApiResult.results![0].address1.toString()),
                             ),
-                            ListTile(
+                            if(zipApiResult.results != null) ListTile(
                               leading: const Text('都道府県名カナ'),
                               title: Text(
                                   zipApiResult.results![0].kana1.toString()),
                             ),
-                            ListTile(
+                            if(zipApiResult.results != null) ListTile(
                               leading: const Text('住所2'),
                               title: Text(
                                   zipApiResult.results![0].address2.toString()),
                             ),
-                            ListTile(
-                              leading: const Text('住所3'),
-                              title: Text(
-                                  zipApiResult.results![0].address3.toString()),
-                            ),
-                            ListTile(
+                            if(zipApiResult.results != null) ListTile(
                               leading: const Text('住所2カナ'),
                               title: Text(
                                   zipApiResult.results![0].kana2.toString()),
                             ),
-                            ListTile(
+                            if(zipApiResult.results != null) ListTile(
+                              leading: const Text('住所3'),
+                              title: Text(
+                                  zipApiResult.results![0].address3.toString()),
+                            ),
+                            if(zipApiResult.results != null) ListTile(
                               leading: const Text('住所3カナ'),
                               title: Text(
                                   zipApiResult.results![0].kana3.toString()),
