@@ -22,11 +22,11 @@ class _$MealHistoryTearOff {
   const _$MealHistoryTearOff();
 
   Data call(
-      {int? id,
-      String? timing,
-      String? description,
-      String? meal_type_name,
-      String? taste_type_name}) {
+      {int id = 0,
+      String timing = '',
+      String description = '',
+      String meal_type_name = '',
+      String taste_type_name = ''}) {
     return Data(
       id: id,
       timing: timing,
@@ -46,11 +46,11 @@ const $MealHistory = _$MealHistoryTearOff();
 
 /// @nodoc
 mixin _$MealHistory {
-  int? get id => throw _privateConstructorUsedError;
-  String? get timing => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
-  String? get meal_type_name => throw _privateConstructorUsedError;
-  String? get taste_type_name => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
+  String get timing => throw _privateConstructorUsedError;
+  String get description => throw _privateConstructorUsedError;
+  String get meal_type_name => throw _privateConstructorUsedError;
+  String get taste_type_name => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -64,11 +64,11 @@ abstract class $MealHistoryCopyWith<$Res> {
           MealHistory value, $Res Function(MealHistory) then) =
       _$MealHistoryCopyWithImpl<$Res>;
   $Res call(
-      {int? id,
-      String? timing,
-      String? description,
-      String? meal_type_name,
-      String? taste_type_name});
+      {int id,
+      String timing,
+      String description,
+      String meal_type_name,
+      String taste_type_name});
 }
 
 /// @nodoc
@@ -91,23 +91,23 @@ class _$MealHistoryCopyWithImpl<$Res> implements $MealHistoryCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       timing: timing == freezed
           ? _value.timing
           : timing // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       meal_type_name: meal_type_name == freezed
           ? _value.meal_type_name
           : meal_type_name // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       taste_type_name: taste_type_name == freezed
           ? _value.taste_type_name
           : taste_type_name // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ));
   }
 }
@@ -118,11 +118,11 @@ abstract class $DataCopyWith<$Res> implements $MealHistoryCopyWith<$Res> {
       _$DataCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int? id,
-      String? timing,
-      String? description,
-      String? meal_type_name,
-      String? taste_type_name});
+      {int id,
+      String timing,
+      String description,
+      String meal_type_name,
+      String taste_type_name});
 }
 
 /// @nodoc
@@ -146,49 +146,55 @@ class _$DataCopyWithImpl<$Res> extends _$MealHistoryCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       timing: timing == freezed
           ? _value.timing
           : timing // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       meal_type_name: meal_type_name == freezed
           ? _value.meal_type_name
           : meal_type_name // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       taste_type_name: taste_type_name == freezed
           ? _value.taste_type_name
           : taste_type_name // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$Data implements Data {
+class _$Data extends Data {
   const _$Data(
-      {this.id,
-      this.timing,
-      this.description,
-      this.meal_type_name,
-      this.taste_type_name});
+      {this.id = 0,
+      this.timing = '',
+      this.description = '',
+      this.meal_type_name = '',
+      this.taste_type_name = ''})
+      : super._();
 
   factory _$Data.fromJson(Map<String, dynamic> json) => _$$DataFromJson(json);
 
+  @JsonKey(defaultValue: 0)
   @override
-  final int? id;
+  final int id;
+  @JsonKey(defaultValue: '')
   @override
-  final String? timing;
+  final String timing;
+  @JsonKey(defaultValue: '')
   @override
-  final String? description;
+  final String description;
+  @JsonKey(defaultValue: '')
   @override
-  final String? meal_type_name;
+  final String meal_type_name;
+  @JsonKey(defaultValue: '')
   @override
-  final String? taste_type_name;
+  final String taste_type_name;
 
   @override
   String toString() {
@@ -225,26 +231,27 @@ class _$Data implements Data {
   }
 }
 
-abstract class Data implements MealHistory {
+abstract class Data extends MealHistory {
   const factory Data(
-      {int? id,
-      String? timing,
-      String? description,
-      String? meal_type_name,
-      String? taste_type_name}) = _$Data;
+      {int id,
+      String timing,
+      String description,
+      String meal_type_name,
+      String taste_type_name}) = _$Data;
+  const Data._() : super._();
 
   factory Data.fromJson(Map<String, dynamic> json) = _$Data.fromJson;
 
   @override
-  int? get id;
+  int get id;
   @override
-  String? get timing;
+  String get timing;
   @override
-  String? get description;
+  String get description;
   @override
-  String? get meal_type_name;
+  String get meal_type_name;
   @override
-  String? get taste_type_name;
+  String get taste_type_name;
   @override
   @JsonKey(ignore: true)
   $DataCopyWith<Data> get copyWith => throw _privateConstructorUsedError;

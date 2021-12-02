@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_sample_01/entity/meal_history.dart';
+import 'package:flutter_sample_01/entity/meal_history_response.dart';
 import 'package:http/http.dart' as http;
 
 final mealProvider = StateProvider<Map<String, int>>((ref) => {
@@ -17,19 +18,21 @@ final dropdownSelectedProvider = StateProvider<String?>((ref) => 'breakfast');
 // 画面更新用Provider
 final updateCountProvider = StateProvider((ref) => 0);
 
-final mealHistoryProvider = FutureProvider<List<MealHistory>?>((ref) async {
+final mealHistoryProvider = FutureProvider<MealHistoryResponse>((ref) async {
   final headers = <String, String>{'content-type': 'application/json'};
   final url = Uri.parse('http://192.168.0.4:30000/api/v1/meal_histories');
   final response = await http.get(url, headers: headers);
   // print(jsonDecode(response.body));
-  final decodedJson = json.decode(response.body) as List;
+  final decodedJson = json.decode(response.body) as Map<String, Object?>;
   if(response.statusCode == 200){
     // 動くけど Missing parameter type for 'mealHistoryJson'.
-    List<MealHistory> mealHistoryList = decodedJson.map((mealHistoryJson) => MealHistory.fromJson(mealHistoryJson)).toList();
+    print(decodedJson[0].runtimeType);
+    // List<dynamic> mealHistoryList = decodedJson.map((mealHistoryJson) => MealHistory.fromJson(mealHistoryJson)).toList();
+    final mealHistoryList = MealHistoryResponse.fromJson(decodedJson);
     print(mealHistoryList);
     return mealHistoryList;
   }else{
-    return List.empty();
+    return MealHistoryResponse();
   }
 });
 

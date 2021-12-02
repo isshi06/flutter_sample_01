@@ -7,11 +7,11 @@ part of 'meal_history.dart';
 // **************************************************************************
 
 _$Data _$$DataFromJson(Map<String, dynamic> json) => _$Data(
-      id: json['id'] as int?,
-      timing: json['timing'] as String?,
-      description: json['description'] as String?,
-      meal_type_name: json['meal_type_name'] as String?,
-      taste_type_name: json['taste_type_name'] as String?,
+      id: json['id'] as int? ?? 0,
+      timing: json['timing'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      meal_type_name: json['meal_type_name'] as String? ?? '',
+      taste_type_name: json['taste_type_name'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$DataToJson(_$Data instance) => <String, dynamic>{
