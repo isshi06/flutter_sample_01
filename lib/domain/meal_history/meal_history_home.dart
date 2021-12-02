@@ -63,12 +63,12 @@ class MealHistoryHome extends ConsumerWidget {
                     // エラーが発生した場合に表示されるWidgetを指定
                     error: (error, stack) => Text('Error: $error'),
                     // 非同期処理が完了すると、取得した `config` が `data` で使用できる
-                    data: (mealHistory) {
+                    data: (mealHistoryResponse) {
                       return RefreshIndicator(
                         onRefresh: () async => ref.refresh(mealHistoryProvider),
                         child: Column(
                           children: [
-                            Text(mealHistory.toString()),
+                            Text(mealHistoryResponse.meal_histories![0].toString()),
                             // 仮
                             // Text('aaa'),
                           ],
