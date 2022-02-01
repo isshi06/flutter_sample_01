@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_sample_01/entity/zip_api_result.dart';
 import 'package:http/http.dart' as http;
 
+
+// 画面以外の処理をまとめたファイル
 final zipcodeProvider = StateProvider((ref) => '0010000');
 
 final searchResultProvider = FutureProvider<ZipApiResult>((ref) async {

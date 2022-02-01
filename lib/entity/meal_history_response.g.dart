@@ -8,11 +8,22 @@ part of 'meal_history_response.dart';
 
 _$_MealHistoryResponse _$$_MealHistoryResponseFromJson(
         Map<String, dynamic> json) =>
-    _$_MealHistoryResponse(
-      meal_histories: (json['meal_histories'] as List<dynamic>?)
-              ?.map((e) => MealHistory.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
+    $checkedCreate(
+      r'_$_MealHistoryResponse',
+      json,
+      ($checkedConvert) {
+        final val = _$_MealHistoryResponse(
+          meal_histories: $checkedConvert(
+              'meal_histories',
+              (v) =>
+                  (v as List<dynamic>?)
+                      ?.map((e) =>
+                          MealHistory.fromJson(e as Map<String, dynamic>))
+                      .toList() ??
+                  []),
+        );
+        return val;
+      },
     );
 
 Map<String, dynamic> _$$_MealHistoryResponseToJson(

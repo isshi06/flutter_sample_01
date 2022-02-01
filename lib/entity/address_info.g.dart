@@ -6,15 +6,22 @@ part of 'address_info.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$Data _$$DataFromJson(Map<String, dynamic> json) => _$Data(
-      address1: json['address1'] as String?,
-      address2: json['address2'] as String?,
-      address3: json['address3'] as String?,
-      kana1: json['kana1'] as String?,
-      kana2: json['kana2'] as String?,
-      kana3: json['kana3'] as String?,
-      prefcode: json['prefcode'] as String?,
-      zipcode: json['zipcode'] as String?,
+_$Data _$$DataFromJson(Map<String, dynamic> json) => $checkedCreate(
+      r'_$Data',
+      json,
+      ($checkedConvert) {
+        final val = _$Data(
+          address1: $checkedConvert('address1', (v) => v as String?),
+          address2: $checkedConvert('address2', (v) => v as String?),
+          address3: $checkedConvert('address3', (v) => v as String?),
+          kana1: $checkedConvert('kana1', (v) => v as String?),
+          kana2: $checkedConvert('kana2', (v) => v as String?),
+          kana3: $checkedConvert('kana3', (v) => v as String?),
+          prefcode: $checkedConvert('prefcode', (v) => v as String?),
+          zipcode: $checkedConvert('zipcode', (v) => v as String?),
+        );
+        return val;
+      },
     );
 
 Map<String, dynamic> _$$DataToJson(_$Data instance) => <String, dynamic>{

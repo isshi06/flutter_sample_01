@@ -25,14 +25,14 @@ class _$MealHistoryTearOff {
       {int id = 0,
       String timing = '',
       String description = '',
-      String meal_type_name = '',
-      String taste_type_name = ''}) {
+      String mealTypeName = '',
+      String tasteTypeName = ''}) {
     return Data(
       id: id,
       timing: timing,
       description: description,
-      meal_type_name: meal_type_name,
-      taste_type_name: taste_type_name,
+      mealTypeName: mealTypeName,
+      tasteTypeName: tasteTypeName,
     );
   }
 
@@ -49,8 +49,8 @@ mixin _$MealHistory {
   int get id => throw _privateConstructorUsedError;
   String get timing => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
-  String get meal_type_name => throw _privateConstructorUsedError;
-  String get taste_type_name => throw _privateConstructorUsedError;
+  String get mealTypeName => throw _privateConstructorUsedError;
+  String get tasteTypeName => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -67,8 +67,8 @@ abstract class $MealHistoryCopyWith<$Res> {
       {int id,
       String timing,
       String description,
-      String meal_type_name,
-      String taste_type_name});
+      String mealTypeName,
+      String tasteTypeName});
 }
 
 /// @nodoc
@@ -84,8 +84,8 @@ class _$MealHistoryCopyWithImpl<$Res> implements $MealHistoryCopyWith<$Res> {
     Object? id = freezed,
     Object? timing = freezed,
     Object? description = freezed,
-    Object? meal_type_name = freezed,
-    Object? taste_type_name = freezed,
+    Object? mealTypeName = freezed,
+    Object? tasteTypeName = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -100,13 +100,13 @@ class _$MealHistoryCopyWithImpl<$Res> implements $MealHistoryCopyWith<$Res> {
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      meal_type_name: meal_type_name == freezed
-          ? _value.meal_type_name
-          : meal_type_name // ignore: cast_nullable_to_non_nullable
+      mealTypeName: mealTypeName == freezed
+          ? _value.mealTypeName
+          : mealTypeName // ignore: cast_nullable_to_non_nullable
               as String,
-      taste_type_name: taste_type_name == freezed
-          ? _value.taste_type_name
-          : taste_type_name // ignore: cast_nullable_to_non_nullable
+      tasteTypeName: tasteTypeName == freezed
+          ? _value.tasteTypeName
+          : tasteTypeName // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -121,8 +121,8 @@ abstract class $DataCopyWith<$Res> implements $MealHistoryCopyWith<$Res> {
       {int id,
       String timing,
       String description,
-      String meal_type_name,
-      String taste_type_name});
+      String mealTypeName,
+      String tasteTypeName});
 }
 
 /// @nodoc
@@ -139,8 +139,8 @@ class _$DataCopyWithImpl<$Res> extends _$MealHistoryCopyWithImpl<$Res>
     Object? id = freezed,
     Object? timing = freezed,
     Object? description = freezed,
-    Object? meal_type_name = freezed,
-    Object? taste_type_name = freezed,
+    Object? mealTypeName = freezed,
+    Object? tasteTypeName = freezed,
   }) {
     return _then(Data(
       id: id == freezed
@@ -155,13 +155,13 @@ class _$DataCopyWithImpl<$Res> extends _$MealHistoryCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      meal_type_name: meal_type_name == freezed
-          ? _value.meal_type_name
-          : meal_type_name // ignore: cast_nullable_to_non_nullable
+      mealTypeName: mealTypeName == freezed
+          ? _value.mealTypeName
+          : mealTypeName // ignore: cast_nullable_to_non_nullable
               as String,
-      taste_type_name: taste_type_name == freezed
-          ? _value.taste_type_name
-          : taste_type_name // ignore: cast_nullable_to_non_nullable
+      tasteTypeName: tasteTypeName == freezed
+          ? _value.tasteTypeName
+          : tasteTypeName // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -174,8 +174,8 @@ class _$Data extends Data {
       {this.id = 0,
       this.timing = '',
       this.description = '',
-      this.meal_type_name = '',
-      this.taste_type_name = ''})
+      this.mealTypeName = '',
+      this.tasteTypeName = ''})
       : super._();
 
   factory _$Data.fromJson(Map<String, dynamic> json) => _$$DataFromJson(json);
@@ -191,14 +191,14 @@ class _$Data extends Data {
   final String description;
   @JsonKey(defaultValue: '')
   @override
-  final String meal_type_name;
+  final String mealTypeName;
   @JsonKey(defaultValue: '')
   @override
-  final String taste_type_name;
+  final String tasteTypeName;
 
   @override
   String toString() {
-    return 'MealHistory(id: $id, timing: $timing, description: $description, meal_type_name: $meal_type_name, taste_type_name: $taste_type_name)';
+    return 'MealHistory(id: $id, timing: $timing, description: $description, mealTypeName: $mealTypeName, tasteTypeName: $tasteTypeName)';
   }
 
   @override
@@ -210,15 +210,15 @@ class _$Data extends Data {
             (identical(other.timing, timing) || other.timing == timing) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            (identical(other.meal_type_name, meal_type_name) ||
-                other.meal_type_name == meal_type_name) &&
-            (identical(other.taste_type_name, taste_type_name) ||
-                other.taste_type_name == taste_type_name));
+            (identical(other.mealTypeName, mealTypeName) ||
+                other.mealTypeName == mealTypeName) &&
+            (identical(other.tasteTypeName, tasteTypeName) ||
+                other.tasteTypeName == tasteTypeName));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, timing, description, meal_type_name, taste_type_name);
+      runtimeType, id, timing, description, mealTypeName, tasteTypeName);
 
   @JsonKey(ignore: true)
   @override
@@ -236,8 +236,8 @@ abstract class Data extends MealHistory {
       {int id,
       String timing,
       String description,
-      String meal_type_name,
-      String taste_type_name}) = _$Data;
+      String mealTypeName,
+      String tasteTypeName}) = _$Data;
   const Data._() : super._();
 
   factory Data.fromJson(Map<String, dynamic> json) = _$Data.fromJson;
@@ -249,9 +249,9 @@ abstract class Data extends MealHistory {
   @override
   String get description;
   @override
-  String get meal_type_name;
+  String get mealTypeName;
   @override
-  String get taste_type_name;
+  String get tasteTypeName;
   @override
   @JsonKey(ignore: true)
   $DataCopyWith<Data> get copyWith => throw _privateConstructorUsedError;
