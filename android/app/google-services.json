@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "827733763934",
+    "project_id": "mendo-development",
+    "storage_bucket": "mendo-development.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:827733763934:android:2c6a258c164e269cd411cf",
+        "android_client_info": {
+          "package_name": "com.isshi.mendo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "827733763934-7kosnck32r58k2ti8bd9cb77n85224rh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmUW8gf8n6uOQ5N6Yd_IUbrmO5gGILdqE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "827733763934-7kosnck32r58k2ti8bd9cb77n85224rh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
