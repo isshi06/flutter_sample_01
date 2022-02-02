@@ -12,8 +12,8 @@ final mealProvider = StateProvider<Map<String, int>>(
   },
 );
 
-final dropdownProvider =
-    Provider<List<String>>((ref) => <String>['breakfast', 'lunch', 'dinner', 'snack']);
+final dropdownProvider = Provider<List<String>>(
+    (ref) => <String>['breakfast', 'lunch', 'dinner', 'snack']);
 
 final dropdownSelectedProvider = StateProvider<String?>((ref) => 'breakfast');
 
@@ -31,13 +31,14 @@ final mealHistoryProvider = FutureProvider<MealHistoryResponse>(
       print(mealHistoryList);
       return mealHistoryList;
     } else {
-      return MealHistoryResponse();
+      return const MealHistoryResponse();
     }
   },
 );
 
 class MealHistoryService {
-  Future<Map<String, Object?>> postHistory(String description, String timing) async {
+  Future<Map<String, Object?>> postHistory(
+      String description, String timing) async {
     final headers = <String, String>{'content-type': 'application/json'};
     final body = json.encode({
       'user_id': '1',
