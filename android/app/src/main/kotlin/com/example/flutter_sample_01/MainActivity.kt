@@ -1,4 +1,4 @@
-package com.example.flutter_sample_01
+package com.isshi.mendo
 
 import io.flutter.embedding.android.FlutterActivity
 
