@@ -65,50 +65,49 @@ class MealHistoryHome extends ConsumerWidget {
             },
             child: const Text('更新'),
           ),
-          Center(
-            child: Wrap(
-              children: [
-                ref.watch(mealHistoryProvider).when(
-                      // 非同期処理中は `loading` で指定したWidgetが表示される
-                      loading: () => const CircularProgressIndicator(),
-                      // エラーが発生した場合に表示されるWidgetを指定
-                      error: (error, stack) => Text('Error: $error'),
-                      // 非同期処理が完了すると、取得した `config` が `data` で使用できる
-                      data: (mealHistoryResponse) {
-                        return RefreshIndicator(
-                          onRefresh: () async => ref.refresh(mealHistoryProvider),
-                          child: ListView(
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            children: <Widget>[
-                              Text(mealHistoryResponse.meal_histories[0].toString()),
-                              // if(mealHistoryResponse.meal_histories[0] == null) const Text('検索結果がありません'),
-                              ListTile(
-                                leading: const Text('系統'),
-                                title: Text(mealHistoryResponse.meal_histories[0].mealTypeName),
-                              ),
-                              ListTile(
-                                leading: const Text('詳細'),
-                                title: Text(mealHistoryResponse.meal_histories[0].description),
-                              ),
-                              ListTile(
-                                leading: const Text('リスト描画テスト'),
-                                title: Text(mealHistoryResponse.meal_histories[0].mealTypeName),
-                              ),
-                              ListTile(
-                                leading: const Text('描画テスト'),
-                                title: Text(mealHistoryResponse.meal_histories[0].description),
-                              ),
-                              // 仮
-                              // Text('aaa'),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-              ],
-            ),
+          Wrap(
+            children: [
+              ref.watch(mealHistoryProvider).when(
+                    // 非同期処理中は `loading` で指定したWidgetが表示される
+                    loading: () => const Center(child: CircularProgressIndicator()),
+                    // エラーが発生した場合に表示されるWidgetを指定
+                    error: (error, stack) => Text('Error: $error'),
+                    // 非同期処理が完了すると、取得した `config` が `data` で使用できる
+                    data: (mealHistoryResponse) {
+                      return RefreshIndicator(
+                        onRefresh: () async => ref.refresh(mealHistoryProvider),
+                        child: ListView(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          children: <Widget>[
+                            Text(mealHistoryResponse.meal_histories[0].toString()),
+                            // if(mealHistoryResponse.meal_histories[0] == null) const Text('検索結果がありません'),
+                            ListTile(
+                              leading: const Text('系統'),
+                              title: Text(mealHistoryResponse.meal_histories[0].mealTypeName),
+                            ),
+                            ListTile(
+                              leading: const Text('詳細'),
+                              title: Text(mealHistoryResponse.meal_histories[0].description),
+                            ),
+                            ListTile(
+                              leading: const Text('リスト描画テスト'),
+                              title: Text(mealHistoryResponse.meal_histories[0].mealTypeName),
+                            ),
+                            ListTile(
+                              leading: const Text('描画テスト'),
+                              title: Text(mealHistoryResponse.meal_histories[0].description),
+                            ),
+                            // 仮
+                            // Text('aaa'),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+            ],
           ),
+          // ),
           // Text('$_counter'),
         ],
       ),

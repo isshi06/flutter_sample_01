@@ -27,12 +27,11 @@ class SearchByZipcode extends ConsumerWidget {
                 ),
             child: const Text('住所検索'),
           ),
-          Center(
-            child: Wrap(
+          Wrap(
               children: [
                 ref.watch(searchResultProvider).when(
                       // 非同期処理中は `loading` で指定したWidgetが表示される
-                      loading: () => const CircularProgressIndicator(),
+                      loading: () => const Center(child: CircularProgressIndicator()),
                       // エラーが発生した場合に表示されるWidgetを指定
                       error: (error, stack) => Text('Error: $error'),
                       // 非同期処理が完了すると、取得した `config` が `data` で使用できる
@@ -86,7 +85,6 @@ class SearchByZipcode extends ConsumerWidget {
                     ),
               ],
             ),
-          ),
         ],
       ),
     );
