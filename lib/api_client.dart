@@ -23,6 +23,7 @@ typedef Callback = Future<http.Response> Function();
 typedef JsonMap = Map<String, dynamic>;
 JsonMap parseJsonMap(String input) => json.decode(input) as JsonMap;
 
+// API処理をラップしたい(未使用)
 class ApiClient {
   factory ApiClient() => _cache;
   ApiClient._internal(this.env);
