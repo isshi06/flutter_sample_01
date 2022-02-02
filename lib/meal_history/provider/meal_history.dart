@@ -1,8 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_sample_01/entity/meal_history.dart';
-import 'package:flutter_sample_01/entity/meal_history_response.dart';
+import 'package:flutter_sample_01/meal_history/model/meal_history_response.dart';
 import 'package:http/http.dart' as http;
 
 final mealProvider = StateProvider<Map<String, int>>(

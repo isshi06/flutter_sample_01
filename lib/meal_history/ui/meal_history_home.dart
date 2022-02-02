@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_sample_01/service/meal_history.dart';
+import 'package:flutter_sample_01/meal_history/provider/meal_history.dart';
 
 class MealHistoryHome extends ConsumerWidget {
   MealHistoryHome({Key? key}) : super(key: key);

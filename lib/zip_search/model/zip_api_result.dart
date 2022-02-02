@@ -1,4 +1,4 @@
-import 'package:flutter_sample_01/entity/address_info.dart';
+import 'package:flutter_sample_01/zip_search/model/address_info.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'zip_api_result.freezed.dart';

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_sample_01/entity/zip_api_result.dart';
+import 'package:flutter_sample_01/zip_search/model/zip_api_result.dart';
 import 'package:http/http.dart' as http;
 
 

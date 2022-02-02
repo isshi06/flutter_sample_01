@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:http/http.dart' as http;
 
+// APIの処理をまとめたかったファイル(未使用)
 class ApiService {
   Future<void> zipApi(String zipcode) async {
     final url =

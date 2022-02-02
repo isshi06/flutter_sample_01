@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_sample_01/entity/zip_api_result.dart';
-import 'package:flutter_sample_01/service/zipcode.dart';
+import 'package:flutter_sample_01/zip_search/model/zip_api_result.dart';
+import 'package:flutter_sample_01/zip_search/provider/zipcode.dart';
 
 class SearchByZipcode extends ConsumerWidget {
   SearchByZipcode({Key? key}) : super(key: key);
@@ -43,39 +43,53 @@ class SearchByZipcode extends ConsumerWidget {
                               children: [
                                 if (zipApiResult.results == null) const Text('検索結果がありません'),
                                 if (zipApiResult.results != null)
-                                  ListTile(
-                                    leading: const Text('都道府県コード'),
-                                    title: Text(zipApiResult.results![0].prefcode.toString()),
+                                  Card(
+                                    child: ListTile(
+                                      leading: const Text('都道府県コード'),
+                                      title: Text(zipApiResult.results![0].prefcode.toString()),
+                                    ),
                                   ),
                                 if (zipApiResult.results != null)
-                                  ListTile(
-                                    leading: const Text('都道府県名'),
-                                    title: Text(zipApiResult.results![0].address1.toString()),
+                                  Card(
+                                    child: ListTile(
+                                      leading: const Text('住所1'),
+                                      title: Text(zipApiResult.results![0].address1.toString()),
+                                    ),
                                   ),
                                 if (zipApiResult.results != null)
-                                  ListTile(
-                                    leading: const Text('都道府県名カナ'),
-                                    title: Text(zipApiResult.results![0].kana1.toString()),
+                                  Card(
+                                    child: ListTile(
+                                      leading: const Text('都道府県名カナ'),
+                                      title: Text(zipApiResult.results![0].kana1.toString()),
+                                    ),
                                   ),
                                 if (zipApiResult.results != null)
-                                  ListTile(
-                                    leading: const Text('住所2'),
-                                    title: Text(zipApiResult.results![0].address2.toString()),
+                                  Card(
+                                    child: ListTile(
+                                      leading: const Text('住所2'),
+                                      title: Text(zipApiResult.results![0].address2.toString()),
+                                    ),
                                   ),
                                 if (zipApiResult.results != null)
-                                  ListTile(
-                                    leading: const Text('住所2カナ'),
-                                    title: Text(zipApiResult.results![0].kana2.toString()),
+                                  Card(
+                                    child: ListTile(
+                                      leading: const Text('住所2カナ'),
+                                      title: Text(zipApiResult.results![0].kana2.toString()),
+                                    ),
                                   ),
                                 if (zipApiResult.results != null)
-                                  ListTile(
-                                    leading: const Text('住所3'),
-                                    title: Text(zipApiResult.results![0].address3.toString()),
+                                  Card(
+                                    child: ListTile(
+                                      leading: const Text('住所3'),
+                                      title: Text(zipApiResult.results![0].address3.toString()),
+                                    ),
                                   ),
                                 if (zipApiResult.results != null)
-                                  ListTile(
-                                    leading: const Text('住所3カナ'),
-                                    title: Text(zipApiResult.results![0].kana3.toString()),
+                                  Card(
+                                    child: ListTile(
+                                      leading: const Text('住所3カナ'),
+                                      title: Text(zipApiResult.results![0].kana3.toString()),
+                                    ),
                                   ),
                               ],
                             ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_sample_01/domain/meal_history/meal_history_home.dart';
-import 'package:flutter_sample_01/domain/zipcode/search_by_zipcode.dart';
+import 'package:flutter_sample_01/meal_history/ui/meal_history_home.dart';
+import 'package:flutter_sample_01/zip_search/ui/search_by_zipcode.dart';
 
 void main() {
   runApp(
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: DefaultTabController(
-        length: 2,
+        length: 3,
         child: HomePage(),
       ),
     );
@@ -40,6 +40,7 @@ class HomePage extends ConsumerWidget {
   final List<Tab> myTabs = <Tab>[
     const Tab(text: '郵便番号検索'),
     const Tab(text: '食事日記'),
+    const Tab(text: 'プロフィール'),
   ];
 
   @override
@@ -54,6 +55,7 @@ class HomePage extends ConsumerWidget {
       body: TabBarView(
         children: [
           SearchByZipcode(),
+          MealHistoryHome(),
           MealHistoryHome(),
         ],
       ),
