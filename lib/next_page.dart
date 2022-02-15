@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 
 class NextPage extends StatelessWidget {
-  NextPage(this.name, {Key? key}) : super(key: key);
-  String name;
+  const NextPage(this.name, {Key? key}) : super(key: key);
+  final String name;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('吾輩は猫である'),
+        title: const Text('画面間データ受け渡しテスト'),
       ),
-      body: Container(
-        color: Colors.red,
-        child: Text(name)
-      ),
+      body: Container(color: Colors.red, child: Text(name)),
     );
   }
-  
 }
