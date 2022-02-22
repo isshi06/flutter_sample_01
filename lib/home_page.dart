@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_sample_01/meal_history/ui/meal_history_home.dart';
 import 'package:flutter_sample_01/profile/model/login_user.dart';
+import 'package:flutter_sample_01/sidebar.dart';
 import 'package:flutter_sample_01/zip_search/ui/search_by_zipcode.dart';
+import 'package:page_transition/page_transition.dart';
 
 import 'login/ui/login_home.dart';
 import 'next_page.dart';
@@ -42,7 +44,7 @@ class HomePage extends ConsumerWidget {
                 ),
                 child: Column(
                   children: [
-                    Text(
+                    const Text(
                       'My App',
                       style: TextStyle(
                         fontSize: 24,
@@ -51,7 +53,7 @@ class HomePage extends ConsumerWidget {
                     ),
                     Text(
                       '${userEmail.state}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 15,
                         color: Colors.white,
                       ),
@@ -60,12 +62,15 @@ class HomePage extends ConsumerWidget {
                 ),
               ),
               ListTile(
-                title: const Text('Home1'),
+                title: const Text('アニメーションあり'),
                 onTap: () {
-                  Navigator.of(context).push<void>(
-                    MaterialPageRoute(builder: (context) {
-                      return NextPage('こころ');
-                    }),
+                  Navigator.push<void>(
+                    context,
+                    PageTransition(
+                      child: NextPage('aaa'),
+                      type: PageTransitionType.leftToRight,
+                      duration: const Duration(milliseconds: 100),
+                    ),
                   );
                 },
               ),

@@ -27,76 +27,74 @@ class LoginPage extends ConsumerWidget {
     final localUser = ref.watch(userProvider.state);
     final userEmail = ref.watch(userEmailProvider.state);
 
-    return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          child: Container(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center, // 中央寄せ
-              children: <Widget>[
-                // const SizedBox(height: 32),
-                TextFormField(
-                  decoration: const InputDecoration(labelText: 'メールアドレス'),
-                  onChanged: (String value) {
-                    loginUserEmail = value;
+    return Center(
+      child: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center, // 中央寄せ
+            children: <Widget>[
+              // const SizedBox(height: 32),
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'メールアドレス'),
+                onChanged: (String value) {
+                  loginUserEmail = value;
+                  // setState(() {
+                  //   loginUserEmail = value;
+                  // });
+                },
+              ),
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'パスワード'),
+                obscureText: true,
+                onChanged: (String value) {
+                  loginUserPassword = value;
+                  // setState(() {
+                  //   loginUserPassword = value;
+                  // });
+                },
+              ),
+              const SizedBox(height: 8),
+              ElevatedButton(
+                onPressed: () async {
+                  try {
+                    // メール/パスワードでログイン
+                    final auth = FirebaseAuth.instance;
+                    final result = await auth.signInWithEmailAndPassword(
+                      email: loginUserEmail,
+                      password: loginUserPassword,
+                    );
+                    // ログインに成功した場合
+                    // TODO: ログインユーザーを保持する処理
+                    final user = result.user!;
+                    // var appUser = new LoginUser(user.email, '仮');
+                    print('----------------------------');
+                    localUser.update((user) => LoginUser(user.email, '仮'));
+                    // if (user.email is String) {
+                    //userEmail.update((user) => user.email);
+                    // }
+                    userEmail.state = user.email;
+                    print(userEmail.state);
+                    // ref.read(userProvider) = appUser;
+                    print('login user email: ${user.email}');
+                    await Navigator.of(context).pushReplacement<void, void>(
+                      MaterialPageRoute(builder: (context) {
+                        return HomePage();
+                      }),
+                    );
+                  } on Exception catch (e) {
+                    // ログインに失敗した場合
+                    infoText = 'ログインNG：${e.toString()}';
                     // setState(() {
-                    //   loginUserEmail = value;
+                    //   infoText = 'ログインNG：${e.toString()}';
                     // });
-                  },
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(labelText: 'パスワード'),
-                  obscureText: true,
-                  onChanged: (String value) {
-                    loginUserPassword = value;
-                    // setState(() {
-                    //   loginUserPassword = value;
-                    // });
-                  },
-                ),
-                const SizedBox(height: 8),
-                ElevatedButton(
-                  onPressed: () async {
-                    try {
-                      // メール/パスワードでログイン
-                      final auth = FirebaseAuth.instance;
-                      final result = await auth.signInWithEmailAndPassword(
-                        email: loginUserEmail,
-                        password: loginUserPassword,
-                      );
-                      // ログインに成功した場合
-                      // TODO: ログインユーザーを保持する処理
-                      final user = result.user!;
-                      // var appUser = new LoginUser(user.email, '仮');
-                      print('----------------------------');
-                      localUser.update((user) => LoginUser(user.email, '仮'));
-                      // if (user.email is String) {
-                      //userEmail.update((user) => user.email);
-                      // }
-                      userEmail.state = user.email;
-                      print(userEmail.state);
-                      // ref.read(userProvider) = appUser;
-                      print('login user email: ${user.email}');
-                      await Navigator.of(context).pushReplacement<void, void>(
-                        MaterialPageRoute(builder: (context) {
-                          return HomePage();
-                        }),
-                      );
-                    } on Exception catch (e) {
-                      // ログインに失敗した場合
-                      infoText = 'ログインNG：${e.toString()}';
-                      // setState(() {
-                      //   infoText = 'ログインNG：${e.toString()}';
-                      // });
-                    }
-                  },
-                  child: const Text('ログイン'),
-                ),
-                const SizedBox(height: 8),
-                Text(infoText),
-              ],
-            ),
+                  }
+                },
+                child: const Text('ログイン'),
+              ),
+              const SizedBox(height: 8),
+              Text(infoText),
+            ],
           ),
         ),
       ),
